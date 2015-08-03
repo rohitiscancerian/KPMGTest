@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KPMG_Assignment", "KPMG_Assignment\KPMG_Assignment.csproj", "{D285DD4F-2783-4C7B-9F9F-B1E8E0863E85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KPMG_Assignment.Tests", "KPMG_Assignment.Tests\KPMG_Assignment.Tests.csproj", "{3F347983-8A8E-412E-8D31-52A1F52F0B95}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D285DD4F-2783-4C7B-9F9F-B1E8E0863E85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D285DD4F-2783-4C7B-9F9F-B1E8E0863E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D285DD4F-2783-4C7B-9F9F-B1E8E0863E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D285DD4F-2783-4C7B-9F9F-B1E8E0863E85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F347983-8A8E-412E-8D31-52A1F52F0B95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F347983-8A8E-412E-8D31-52A1F52F0B95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F347983-8A8E-412E-8D31-52A1F52F0B95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F347983-8A8E-412E-8D31-52A1F52F0B95}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
