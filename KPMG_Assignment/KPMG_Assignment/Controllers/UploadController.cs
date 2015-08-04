@@ -19,7 +19,24 @@ namespace KPMG_Assignment.Controllers
 {
     public class UploadController : Controller
     {
-        private const string FileUploadControlId = "FileUpload";
+        private const string TABLE_NAME = "TABLE_NAME";
+        private const string TABLE_NAME_ACCOUNTS = "KPMG_Accounts";
+        private const string TABLE_NAME_INVALID_ACCTS = "KPMG_Invalid_Accounts";
+        private const string XLS_FILE_EXTENTION = ".xls";
+        private const string XLSX_FILE_EXTENTION = ".xlsx";
+
+        private const string COLUMN_NAME_ACCOUNT = "Account";
+        private const string COLUMN_NAME_DESCRIPTION = "Description";
+        private const string COLUMN_NAME_CURRENCY_CODE = "CurrencyCode";
+        private const string COLUMN_NAME_AMOUNT = "Amount";
+        private const string COLUMN_NAME_REASON = "Reason";
+
+        private const string ACTION_NAME_SHOW_ACCOUNTS = "ShowAccounts";
+        private const string ACTION_NAME_GET_UPLOADED_DATA = "GetUploadedData";
+
+
+
+
         // GET: UploadFile
         public ActionResult Index()
         {
@@ -37,13 +54,11 @@ namespace KPMG_Assignment.Controllers
                 HttpPostedFileBase file = objFile.File;
                 GetFileData(file);
 
-                return Redirect("GetUploadedData");
- 
+                return Redirect(ACTION_NAME_GET_UPLOADED_DATA);
             }
             else
             { 
                 return View("Index",objFile); 
-                
             }
             
         }
@@ -57,7 +72,7 @@ namespace KPMG_Assignment.Controllers
             objViewModelAccts.validAccounts = dbContext.KPMG_Accounts.ToList().AsQueryable();
             objViewModelAccts.invalidAccounts = dbContext.KPMG_Invalid_Accounts.ToList().AsQueryable();
 
-            return View("ShowAccounts", objViewModelAccts);
+            return View(ACTION_NAME_SHOW_ACCOUNTS, objViewModelAccts);
         }
 
         private int GetFileData(HttpPostedFileBase file)
@@ -68,7 +83,7 @@ namespace KPMG_Assignment.Controllers
                 string fileExtension =
                                      System.IO.Path.GetExtension(file.FileName);
 
-                if (fileExtension == ".xls" || fileExtension == ".xlsx")
+                if (fileExtension == XLS_FILE_EXTENTION || fileExtension == XLSX_FILE_EXTENTION)
                 {
 
                     string fileLocation = Server.MapPath("~/Content/") + file.FileName;
@@ -97,7 +112,7 @@ namespace KPMG_Assignment.Controllers
                     //excel data saves in temp file here.
                     foreach (DataRow row in dt.Rows)
                     {
-                        excelSheets[t] = row["TABLE_NAME"].ToString();
+                        excelSheets[t] = row[TABLE_NAME].ToString();
                         t++;
                     }
                     OleDbConnection excelConnection1 = new OleDbConnection(excelConnString);
@@ -105,8 +120,8 @@ namespace KPMG_Assignment.Controllers
 
                     List<KPMGAccount> lstValidAcct = GetValidInvalidAccounts(excelSheets, excelConnection1, lstInvalidAcct);
 
-                    InsertData(lstValidAcct, "KPMG_Accounts");
-                    InsertData(lstInvalidAcct, "KPMG_Invalid_Accounts");
+                    InsertData(lstValidAcct, TABLE_NAME_ACCOUNTS);
+                    InsertData(lstInvalidAcct, TABLE_NAME_INVALID_ACCTS);
 
                     return 4;   // Data successfully loaded
                 }
@@ -144,7 +159,14 @@ namespace KPMG_Assignment.Controllers
             }
             return excelConnectionString;
         }
-
+        /// <summary>
+        /// This method iterates through all the sheets in the excel file 
+        /// and separates valid and invalid accounts
+        /// </summary>
+        /// <param name="excelSheets"></param>
+        /// <param name="excelConnection"></param>
+        /// <param name="lstInvalidAccts"></param>
+        /// <returns></returns>
         private List<KPMGAccount> GetValidInvalidAccounts(String[] excelSheets, OleDbConnection excelConnection, List<KPMGInvalidAccount> lstInvalidAccts)
         {
             DataSet ds;
@@ -194,6 +216,12 @@ namespace KPMG_Assignment.Controllers
             }
         }
 
+        /// <summary>
+        /// This method validates the account information
+        /// </summary>
+        /// <param name="acct"></param>
+        /// <param name="invalidAccts"></param>
+        /// <returns></returns>
         private bool ValidateAccountInfo(KPMGAccount acct, List<KPMGInvalidAccount> invalidAccts)
         {
             bool IsValid = true;
@@ -249,6 +277,13 @@ namespace KPMG_Assignment.Controllers
             else { return false; }
         }
 
+        /// <summary>
+        /// This method inserts a list of objects into a sql table 
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="TabelName"></param>
         private static void InsertData<T>(List<T> list, string TabelName)
         {
             DataTable dt = new DataTable("Accounts");
@@ -257,19 +292,24 @@ namespace KPMG_Assignment.Controllers
             using (SqlBulkCopy bulkcopy = new SqlBulkCopy(ConfigurationManager.ConnectionStrings["kpmgConnection"].ConnectionString))
             {
                 bulkcopy.BulkCopyTimeout = 660;
-                bulkcopy.ColumnMappings.Add("Account", "Account");
-                bulkcopy.ColumnMappings.Add("Description", "Description");
-                bulkcopy.ColumnMappings.Add("CurrencyCode", "CurrencyCode");
-                bulkcopy.ColumnMappings.Add("Amount", "Amount");
-                if (TabelName == "KPMG_Invalid_Accounts")
-                { bulkcopy.ColumnMappings.Add("Reason", "Reason"); }
+                bulkcopy.ColumnMappings.Add(COLUMN_NAME_ACCOUNT, COLUMN_NAME_ACCOUNT);
+                bulkcopy.ColumnMappings.Add(COLUMN_NAME_DESCRIPTION, COLUMN_NAME_DESCRIPTION);
+                bulkcopy.ColumnMappings.Add(COLUMN_NAME_CURRENCY_CODE, COLUMN_NAME_CURRENCY_CODE);
+                bulkcopy.ColumnMappings.Add(COLUMN_NAME_AMOUNT, COLUMN_NAME_AMOUNT);
+                if (TabelName == TABLE_NAME_INVALID_ACCTS)
+                { bulkcopy.ColumnMappings.Add(COLUMN_NAME_REASON, COLUMN_NAME_REASON); }
                 bulkcopy.DestinationTableName = TabelName;
                 bulkcopy.WriteToServer(dt);
             }
         }
 
         
-
+        /// <summary>
+        /// This method converts a list of objects into a datatable
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static DataTable ConvertToDataTable<T>(IList<T> data)
         {
             PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(T));
