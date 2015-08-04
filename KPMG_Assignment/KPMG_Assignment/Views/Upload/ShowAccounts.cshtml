@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Uploaded Accounts";
+    
+}
+@using GridMvc.Html
+@model  KPMG_Assignment.Models.ViewModelAccounts
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
+    <title></title>
+</head>
+<body>
+@using (Html.BeginForm("GetUploadedData", "Upload", FormMethod.Post))
+{ 
+        <div style="font-weight:100;font-size:large">
+        Valid Accounts
+    </div>
+    <div style="border:solid">
+        
+        @Html.Grid(Model.validAccounts).Columns(columns =>
+          {
+              columns.Add(foo => foo.Account).Titled("Account").SetWidth(110);
+              columns.Add(foo => foo.Description).Titled("Description").SetWidth(200);
+              columns.Add(foo => foo.CurrencyCode).Titled("Currency Code").SetWidth(50);
+              columns.Add(foo => foo.Amount).Titled("Amount").SetWidth(100);
+          }).WithPaging(20)
+    </div>
+    <br />
+    <div style="font-weight:100;font-size:large">
+        Invalid Accounts
+    </div>
+    <div style="border:solid">
+        @Html.Grid(Model.invalidAccounts).Columns(columns =>
+        {
+            columns.Add(foo => foo.Account).Titled("Account").SetWidth(110);
+            columns.Add(foo => foo.Description).Titled("Description").SetWidth(200);
+            columns.Add(foo => foo.CurrencyCode).Titled("Currency Code").SetWidth(50);
+            columns.Add(foo => foo.Amount).Titled("Amount").SetWidth(100);
+            columns.Add(foo => foo.Reason).Titled("Reason for Invalidity").SetWidth(100);
+
+        }).WithPaging(20)
+    </div>
+
+}
+</body>
+</html>

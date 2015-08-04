@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="kpmgModelStoreContainer" CdmEntityContainer="kpmgEntities4">
+    <EntitySetMapping Name="KPMG_Accounts">
+      <EntityTypeMapping TypeName="kpmgModel.KPMG_Accounts">
+        <MappingFragment StoreEntitySet="KPMG_Accounts">
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KPMG_Invalid_Accounts">
+      <EntityTypeMapping TypeName="kpmgModel.KPMG_Invalid_Accounts">
+        <MappingFragment StoreEntitySet="KPMG_Invalid_Accounts">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
