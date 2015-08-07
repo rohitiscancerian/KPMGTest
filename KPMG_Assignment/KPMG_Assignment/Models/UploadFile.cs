@@ -8,9 +8,13 @@ using KPMG_Assignment.Validation;
 
 namespace KPMG_Assignment.Models
 {
+
     public class UploadFile
     {
-        [Required(ErrorMessage = "Please browse your xls or xlsx file"), Display(Name = "Upload xls"), NotMapped, ValidateFileXls]
+        private const string USER_MESSAGE_BROWSE_XL = "Please browse your xls or xlsx file";
+        private const string UPLOAD_DISPLAY_NAME = "Upload xls";
+
+        [Required(ErrorMessage = USER_MESSAGE_BROWSE_XL), Display(Name = UPLOAD_DISPLAY_NAME), NotMapped, ValidateFileXls]
         public HttpPostedFileBase File { get; set; }
     }
 }

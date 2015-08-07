@@ -11,7 +11,7 @@ namespace KPMG_Assignment.Validation
         public override bool IsValid(object value)
         {
             const int maxContent = 1024 * 1024 * 10;
-            var allowedExt = new string[] { ".xls", ".xlsx" };
+            var allowedExt = new string[] { Constants.XLS_FILE_EXTENTION, Constants.XLSX_FILE_EXTENTION };
 
             var file = value as HttpPostedFileBase;
 
@@ -21,14 +21,14 @@ namespace KPMG_Assignment.Validation
             // check type of file 
             if (!allowedExt.ToList().Contains(file.FileName.Substring(file.FileName.LastIndexOf("."))))
             {
-                ErrorMessage = "Please upload a file of type: " + string.Join(", ", allowedExt);
+                ErrorMessage = Constants.USE_MESSAGE_UPLOAD_FILE_TYPE + string.Join(", ", allowedExt);
                 return false;
             }
 
             // check the length of the file
             if (file.ContentLength > maxContent)
             {
-                ErrorMessage = "Your file is too large, maximum allowed size is : " + (maxContent / 1024) + "MB";
+                ErrorMessage = Constants.USER_MESSAGE_FILE_BIG + (maxContent / 1024) + "MB";
                 return false;
             }
             return true;

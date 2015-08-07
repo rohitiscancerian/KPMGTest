@@ -24,8 +24,6 @@ namespace KPMG_Assignment
             LoadCurrencyCodes();
         }
 
-        
-
         public bool ValidateCurrency(string code)
         {
             if (lstCurrencyCodes.Exists(x => x.code == code))

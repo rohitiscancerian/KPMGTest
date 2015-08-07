@@ -26,5 +26,8 @@ D:\KPMG_Test\KPMGTest\KPMG_Assignment\KPMG_Assignment\bin\System.Web.WebPages.De
 D:\KPMG_Test\KPMGTest\KPMG_Assignment\KPMG_Assignment\bin\System.Web.WebPages.Razor.xml
 D:\KPMG_Test\KPMGTest\KPMG_Assignment\KPMG_Assignment\bin\Antlr3.Runtime.pdb
 D:\KPMG_Test\KPMGTest\KPMG_Assignment\KPMG_Assignment\bin\Newtonsoft.Json.xml
+D:\KPMG_Test\KPMGTest\KPMG_Assignment\KPMG_Assignment\obj\Release\KPMG_Assignment.Constants.resources
+D:\KPMG_Test\KPMGTest\KPMG_Assignment\KPMG_Assignment\obj\Release\KPMG_Assignment.csproj.GenerateResource.Cache
 D:\KPMG_Test\KPMGTest\KPMG_Assignment\KPMG_Assignment\obj\Release\KPMG_Assignment.dll
 D:\KPMG_Test\KPMGTest\KPMG_Assignment\KPMG_Assignment\obj\Release\KPMG_Assignment.pdb
+D:\KPMG_Test\KPMGTest\KPMG_Assignment\KPMG_Assignment\obj\Release\KPMG_Assignment.csprojResolveAssemblyReference.cache
