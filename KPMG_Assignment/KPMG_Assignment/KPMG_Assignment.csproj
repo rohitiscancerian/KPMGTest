@@ -139,6 +139,7 @@
     <Compile Include="Interfaces\IFileProcessing.cs" />
     <Compile Include="Interfaces\ISQLCopy.cs" />
     <Compile Include="Models\Accounts.cs" />
+    <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\KPMGAccounts.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

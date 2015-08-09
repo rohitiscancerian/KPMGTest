@@ -5,15 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using KPMG_Assignment.Models;
 
 namespace KPMG_Assignment
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        public class Currency
-        {
-            public string code {get; set;}
-        }
         public static List<Currency> lstCurrencyCodes;
         protected void Application_Start()
         {
