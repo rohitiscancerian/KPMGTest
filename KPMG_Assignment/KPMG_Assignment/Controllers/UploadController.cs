@@ -20,6 +20,7 @@ namespace KPMG_Assignment.Controllers
     public class UploadController : Controller,IFileProcessing
     {
         private HttpPostedFileBase _file;
+        private IFileProcessing fileProcessing;
         public new HttpPostedFileBase File
         {
             get
@@ -70,15 +71,15 @@ namespace KPMG_Assignment.Controllers
 
         private void GetFileData(HttpPostedFileBase file)
         {
-            IFileProcessing fileProcessing;
+            //IFileProcessing fileProcessing;
             File = file;
             fileProcessing = new FileProcessing(this);
-            fileProcessing.ExtractData();
+            this.ExtractData();
         }
 
         public void ExtractData()
         {
- 	        throw new NotImplementedException();
+            fileProcessing.ExtractData();
         }
     }
 

@@ -17,6 +17,7 @@ namespace KPMG_Assignment.BusinessObjects
         private string _tableName = string.Empty;
         private List<KPMGAccount> _accounts;
         private DataSet _fileData;
+        private ISQLCopy objSqlCopy;
 
         public string ConnectionString
         {
@@ -80,7 +81,7 @@ namespace KPMG_Assignment.BusinessObjects
 
         public void InsertData()
         {
-            throw new NotImplementedException();
+            objSqlCopy.InsertData();
         }
        
         public DataSet FileData
@@ -141,14 +142,14 @@ namespace KPMG_Assignment.BusinessObjects
             TableName = Constants.TABLE_NAME_ACCOUNTS;
             PopulateAccountBOObject();
             Accounts = lstValidAcct;
-            ISQLCopy objSqlCopy = new SQLCopy(this);
-            objSqlCopy.InsertData();
+            objSqlCopy = new SQLCopy(this);
+            this.InsertData();
 
             TableName = Constants.TABLE_NAME_INVALID_ACCTS;
             PopulateAccountBOObject();
             Accounts = lstInvalidAcct;
             objSqlCopy = new SQLCopy(this);
-            objSqlCopy.InsertData();
+            this.InsertData();
         }
 
         /// <summary>

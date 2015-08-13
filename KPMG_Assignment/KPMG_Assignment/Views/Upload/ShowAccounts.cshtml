@@ -30,7 +30,7 @@
               columns.Add(foo => foo.Description).Titled("Description").SetWidth(200);
               columns.Add(foo => foo.CurrencyCode).Titled("Currency Code").SetWidth(50);
               columns.Add(foo => foo.Amount).Titled("Amount").SetWidth(100);
-          }).WithPaging(20)
+          }).Sortable(true).WithPaging(20)
     </div>
     <br />
     <div style="font-weight:100;font-size:large">
@@ -45,7 +45,7 @@
             columns.Add(foo => foo.Amount).Titled("Amount").SetWidth(100);
             columns.Add(foo => foo.Reason).Titled("Reason for Invalidity").SetWidth(100);
 
-        }).WithPaging(20)
+        }).Sortable(true).WithPaging(20)
     </div>
 
 }

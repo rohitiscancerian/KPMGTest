@@ -10,9 +10,10 @@ using KPMG_Assignment.Interfaces;
 
 namespace KPMG_Assignment.Helper_Library
 {
-    public class FileProcessing : IFileProcessing , IAccountBO
+    public class FileProcessing : IFileProcessing, IAccountBO
     {
         private HttpPostedFileBase _file;
+        private IAccountBO objAccountBO;
         public HttpPostedFileBase File
         {
             get
@@ -58,7 +59,6 @@ namespace KPMG_Assignment.Helper_Library
             string fileExtension;
             string excelConnString;
             DataSet ds;
-            IAccountBO objAccountBO ;
             DataTable dt = new DataTable();
 
             if (localFileProcessing.File.ContentLength > 0)
@@ -113,8 +113,8 @@ namespace KPMG_Assignment.Helper_Library
                     }
                     FileData = ds;
                     objAccountBO = new AccountBO(this);
-                    objAccountBO.ValidateData();
-                    objAccountBO.WriteData();
+                    this.ValidateData();
+                    this.WriteData();
                 }
                 else
                 {
@@ -129,13 +129,13 @@ namespace KPMG_Assignment.Helper_Library
 
         public void ValidateData()
         {
-            throw new NotImplementedException();
+            objAccountBO.ValidateData();
         }
 
 
         public void WriteData()
         {
-            throw new NotImplementedException();
+            objAccountBO.WriteData();
         }
     }
 }

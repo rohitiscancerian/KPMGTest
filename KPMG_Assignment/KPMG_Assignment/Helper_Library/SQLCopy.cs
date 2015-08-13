@@ -11,7 +11,7 @@ using KPMG_Assignment.Models;
 
 namespace KPMG_Assignment.Helper_Library
 {
-    public class SQLCopy : ISQLCopy
+    public class SQLCopy :ISQLCopy
     {
         private string _connectionString = string.Empty;
         private Dictionary<int,string> _sourceColumns;
